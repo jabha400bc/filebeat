@@ -1,0 +1,19 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+  - /var/log/app1_beat*.log
+  fields:
+    app_name: app1
+- type: log
+  enabled: true
+  paths:
+  - /var/log/app2_beat*.log
+  fields:
+    app_name: app2
+output.elasticsearch:
+  hosts: ["http://localhost:9200"]
+  index: "log-%{[fields.app_name]}-%{[agent.version]}-%{+yyyy.MM.dd}"
+setup.template.name: "log"
+setup.template.pattern: "log-*"
+setup.ilm.enabled: false
