@@ -9,7 +9,7 @@
 1. This section contains steps for this tutorial.
 
 ### Prepare
-1. Use ubuntu 18.04 instance.
+1. Use ubuntu 18.04 instance. Or Amazon Linux instance
 2. Clone this repo.
 3. Go to repo's directory.
 
