@@ -1,15 +1,13 @@
 #!/bin/bash
 function uninstall_elasticsearch(){
     sudo systemctl kill elasticsearch \
-    && sudo apt-get remove --purge elasticsearch -y \
-    && wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key del - \
-    && sudo rm -f /etc/apt/sources.list.d/elastic-7.x.list \
+    && sudo yum remove elasticsearch -y \
+    && sudo rm -f /etc/yum.repos.d/elasticsearch.repo \
     && echo "Elasticsearch uninstalled"
 }
 function unstall_filebeat(){
     sudo systemctl kill filebeat \
-    && sudo dpkg --remove filebeat \
-    && sudo rm -rf filebeat-*-amd64.deb \
+    && sudo yum remove filebeat -y \
     && echo "Filebeat uninstalled"
 }
 function clean_logs(){

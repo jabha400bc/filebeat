@@ -8,11 +8,21 @@ function install_elasticsearch(){
     # 2. Install the apt-transport-https package on Debian before proceeding
     # 3. Save the repository definition to /etc/apt/sources.list.d/elastic-7.x.list
     # 4. Install the Elasticsearch Debian package.
-    wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add - \
-    && sudo apt-get install apt-transport-https -y \
-    && echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list \
-    && sudo apt-get update -y \
-    && sudo apt-get install elasticsearch -y
+    rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch \
+    && get_yum_repo | sudo tee /etc/yum.repos.d/elasticsearch.repo \
+    && sudo yum install --enablerepo=elasticsearch elasticsearch -y
+}
+function get_yum_repo(){
+cat << EOF
+[elasticsearch]
+name=Elasticsearch repository for 7.x packages
+baseurl=https://artifacts.elastic.co/packages/7.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=0
+autorefresh=1
+type=rpm-md
+EOF
 }
 # Function to Take a backup of ES's config yaml because we will be changing the http.host
 function backup_es_yml(){
