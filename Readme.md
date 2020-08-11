@@ -9,12 +9,13 @@
 1. This section contains steps for this tutorial.
 
 ### Prepare
-1. Use ubuntu 18.04 instance. Or Amazon Linux instance
+1. Use ubuntu 18.04 instance. Or Amazon Linux instance. 
+    * Make sure to use correct scripts for your platform.
 2. Clone this repo.
 3. Go to repo's directory.
 
 ### Install Elasticsearch
-1. Run elasticsearch installer.
+1. Run elasticsearch installer.  Make sure to use correct scripts for your platform.
     ```
     ./install_elasticsearch.sh
     ```
@@ -22,7 +23,7 @@
 3. Feel free to look at the script's code.
 
 ### Install filebeat.
-1. Run filebeat installer.
+1. Run filebeat installer.  Make sure to use correct scripts for your platform.
     ```
     ./install_filebeat.sh
     ```
