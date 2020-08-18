@@ -11,6 +11,16 @@ filebeat.inputs:
   - /var/log/app2_beat*.log
   fields:
     app_name: app2
+- type: docker
+  containers.ids: '*'
+  processors:
+    - copy_fields:
+        fields:
+          - from: docker.attrs.tag
+            to: fields.app_name
+        fail_on_error: false
+        ignore_missing: true
+
 output.elasticsearch:
   hosts: ["http://localhost:9200"]
   index: "log-%{[fields.app_name]}-%{[agent.version]}-%{+yyyy.MM.dd}"
